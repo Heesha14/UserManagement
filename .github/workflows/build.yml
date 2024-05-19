@@ -12,7 +12,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:    
+    steps:  
+    
+    - name: Checkout      
+      uses: actions/checkout@v4
+    
     - name: Cache Node Modules
       id: cache
       uses: actions/cache@v2
@@ -27,9 +31,6 @@ jobs:
         echo "Listing all files:"
         ls -R
         echo "Package-lock Hash: ${{ hashFiles('package-lock.json') }}"  
-
-    - name: Checkout      
-      uses: actions/checkout@v4
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
