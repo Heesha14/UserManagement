@@ -9,9 +9,6 @@ on:
 env:
   NODE_VERSION: '20.x'                
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
