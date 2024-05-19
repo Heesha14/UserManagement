@@ -24,14 +24,6 @@ jobs:
        path: node_modules
        key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
 
-    - name: Debug Package-lock Hash
-      run: |
-        echo "Listing package-lock.json files:"
-        ls -l package-lock.json
-        echo "Listing all files:"
-        ls -R
-        echo "Package-lock Hash: ${{ hashFiles('package-lock.json') }}"  
-
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
@@ -39,11 +31,6 @@ jobs:
 
     - name: Install Dependencies
       run: npm install
-
-    - name: Grant Execution Permissions
-      run: |
-        chmod +x ./node_modules/.bin/nodemon
-        chmod +x ./node_modules/.bin/ts-node
 
     - name: Build
       run: npm run build --if-present
