@@ -1,0 +1,47 @@
+name: Continuous Integration
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20.x'                
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cache Node Modules
+      id: cache
+      uses: actions/cache@v2
+      with:
+       path: node_modules
+       key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Checkout      
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build --if-present
+
+    - name: Generate Artifact
+      run: cd build && zip -r artifact.zip ./ -x '*.git*' 
+      
+    - name: Store Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: backend-artifact
+        path: build/artifact.zip      
