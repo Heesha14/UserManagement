@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    
     - name: Cache Node Modules
       id: cache
       uses: actions/cache@v2
@@ -30,6 +31,9 @@ jobs:
 
     - name: Install Dependencies
       run: npm install
+
+    - name: Grant Execution Permission
+      run: chmod +x ./node_modules/.bin/nodemon
 
     - name: Build
       run: npm start
