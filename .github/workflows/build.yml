@@ -32,20 +32,16 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Grant Execution Permission
-      run: chmod +x ./node_modules/.bin/nodemon
-
-    - name: Grant Execution Permission2
-      run: chmod +x ./node_modules/.bin/ts-node
+    - name: Grant Execution Permissions
+      run: |
+        chmod +x ./node_modules/.bin/nodemon
+        chmod +x ./node_modules/.bin/ts-node
 
     - name: Build
-      run: npm start
-
-    - name: Generate Artifact
-      run: cd build && zip -r artifact.zip ./ -x '*.git*' 
+      run: npm run build --if-present
       
     - name: Store Artifact
       uses: actions/upload-artifact@v2
       with:
         name: backend-artifact
-        path: build/artifact.zip      
+        path: .
