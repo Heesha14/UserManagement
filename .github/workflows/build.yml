@@ -35,6 +35,9 @@ jobs:
     - name: Grant Execution Permission
       run: chmod +x ./node_modules/.bin/nodemon
 
+    - name: Grant Execution Permission2
+      run: chmod +x ./node_modules/.bin/ts-node
+
     - name: Build
       run: npm start
 
