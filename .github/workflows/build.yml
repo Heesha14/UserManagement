@@ -21,7 +21,7 @@ jobs:
       uses: actions/cache@v2
       with:
        path: node_modules
-       key: node-modules-cache
+       key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 
     - name: Checkout      
       uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
       run: npm install
 
     - name: Build
-      run: npm run build
+      run: npm start
 
     - name: Generate Artifact
       run: cd build && zip -r artifact.zip ./ -x '*.git*' 
