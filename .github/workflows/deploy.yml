@@ -29,32 +29,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install GitHub CLI
-      run: sudo apt-get install gh -y
-
-    - name: Authenticate GitHub CLI
-      run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-
-    - name: List Available Artifacts
-      env:
-        GH_TOKEN: ${{ github.token }}
-      run: |
-        echo "Listing available artifacts..."
-        gh run view ${{ github.event.workflow_run.id }} --log  
-      
-    #- name: Download artifact from build job
-      #uses: actions/download-artifact@v4
-      #with:
-        #name: backend-artifact
-        #run-id: ${{ github.event.workflow_run.id }}
-
     - name: Download all artifacts
       uses: dawidd6/action-download-artifact@v3     
       with:
-        workflow: build.yml
-    - name: Display structure of downloaded files
-      run: ls -R
-        
+        name: backend-artifact
+        workflow: build.yml     
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
