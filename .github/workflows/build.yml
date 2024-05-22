@@ -35,7 +35,7 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npm run build --if-present
+      run: npm run build #--if-present
       
     - name: Store Artifact
       uses: actions/upload-artifact@v4
