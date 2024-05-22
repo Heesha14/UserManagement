@@ -29,6 +29,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Install GitHub CLI
+      run: sudo apt-get install gh -y
+
     - name: List Available Artifacts
       run: |
         echo "Listing available artifacts..."
