@@ -42,11 +42,17 @@ jobs:
         echo "Listing available artifacts..."
         gh run view ${{ github.event.workflow_run.id }} --log  
       
-    - name: Download artifact from build job
+    #- name: Download artifact from build job
+      #uses: actions/download-artifact@v4
+      #with:
+        #name: backend-artifact
+        #run-id: ${{ github.event.workflow_run.id }}
+
+    - name: Download all artifacts
       uses: actions/download-artifact@v4
-      with:
-        name: backend-artifact
-        run-id: ${{ github.event.workflow_run.id }}
+    - name: Display structure of downloaded files
+      run: ls -R
+        
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
