@@ -28,6 +28,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: List Available Artifacts
+      run: |
+        echo "Listing available artifacts..."
+        gh run view ${{ github.event.workflow_run.id }} --log      
       
     - name: Download artifact from build job
       uses: actions/download-artifact@v4
