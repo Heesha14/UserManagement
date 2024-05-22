@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: user-management
+  AZURE_WEBAPP_NAME: user-administration
 
 permissions:
   contents: read
