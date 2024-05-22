@@ -46,6 +46,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: backend-artifact
+        run-id: ${{ github.event.workflow_run.id }
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
